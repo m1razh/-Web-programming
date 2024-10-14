@@ -9,8 +9,8 @@
 <body>
     <div id="app">
         <h2>Управление списком</h2>
-        <select>
-            <option v-for="(item, index) in items" :key="index" :selected="index === currentItem">{{ item }}</option>
+        <select  v-model="currentItem">
+            <option v-for="(item, index) in items" :key="index" :value="index">{{ item }}</option>
         </select><br>
         <button @click="prevItem" :disabled="currentItem === 0">Предыдущий</button>
         <button @click="nextItem" :disabled="currentItem === items.length - 1">Следующий</button>
