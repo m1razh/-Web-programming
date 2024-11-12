@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>График функции с использованием v-for</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <style>
+        svg {
+            border: 1px solid #000;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <label>Радиус круга (2-10):</label>
+    <input type="range" v-model="radius" min="2" max="10">
+    
+    <label>Масштаб (10%-100%):</label>
+    <input type="range" v-model="scale" min="10" max="100">
+    
+    <svg :width="width" :height="height">
+        <circle v-for="point in points" :cx="point.x * scaleFactor" :cy="point.y * scaleFactor"
+                :r="radius" fill="blue"></circle>
+    </svg>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                radius: 5,
+                scale: 100,
+                width: 400,
+                height: 200,
+                points: Array.from({ length: 50 }, (_, i) => ({
+                    x: i * 8,
+                    y: Math.sin(i * 0.2) * 50 + 100
+                }))
+            };
+        },
+        computed: {
+            scaleFactor() {
+                return this.scale / 100;
+            }
+        }
+    });
+</script>
+</body>
+</html>

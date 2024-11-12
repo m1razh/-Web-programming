@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Конвертер валют на Vue.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <style>
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    input { width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>Конвертер валют (Курс от 10 января 2024 года)</h2>
+    <table>
+      <tr>
+        <th>Валюта</th>
+        <th>Сумма</th>
+      </tr>
+      <tr v-for="(value, currency) in currencies" :key="currency">
+        <td>{{ currencyNames[currency] }}</td>
+        <td><input type="number" v-model.number="currencies[currency]" placeholder="Введите сумму"></td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        // Курсы валют относительно рубля на 10 января 2024 года
+        exchangeRates: {
+          rub: 1,
+          usd: 75.50,
+          eur: 82.30,
+          jpy: 0.55,
+          cny: 10.50,
+          inr: 0.92
+        },
+        currencyNames: {
+          rub: 'Рубль (RUB)',
+          usd: 'Доллар США (USD)',
+          eur: 'Евро (EUR)',
+          jpy: 'Йена (JPY)',
+          cny: 'Юань (CNY)',
+          inr: 'Рупия (INR)'
+        },
+        // Значения валют для пересчета
+        currencies: {
+          rub: null,
+          usd: null,
+          eur: null,
+          jpy: null,
+          cny: null,
+          inr: null
+        },
+        updatingCurrency: null
+      },
+      watch: {
+        'currencies.rub'(newValue) { this.updateCurrency('rub', newValue); },
+        'currencies.usd'(newValue) { this.updateCurrency('usd', newValue); },
+        'currencies.eur'(newValue) { this.updateCurrency('eur', newValue); },
+        'currencies.jpy'(newValue) { this.updateCurrency('jpy', newValue); },
+        'currencies.cny'(newValue) { this.updateCurrency('cny', newValue); },
+        'currencies.inr'(newValue) { this.updateCurrency('inr', newValue); }
+      },
+      methods: {
+        updateCurrency(inputCurrency, value) {
+			if (this.updatingCurrency === inputCurrency || isNaN(value) || value === null || value === '') return;
+
+				this.updatingCurrency = inputCurrency;
+
+		for (const currency in this.currencies) {
+			if (currency === inputCurrency) {
+			this.currencies[currency] = value;
+		} else {
+			const convertedValue = (parseFloat(value) / this.exchangeRates[inputCurrency]) * this.exchangeRates[currency];
+		this.currencies[currency] = parseFloat(convertedValue.toFixed(2));
+			}
+		}	
+
+		this.updatingCurrency = null;
+		}
+	}
+    });
+  </script>
+</body>
+</html>
