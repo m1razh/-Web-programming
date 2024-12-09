@@ -15,46 +15,59 @@
           <input type="radio" value="all" v-model="mode" /> Все каналы
         </label>
 
-        <svg width="300" height="150" style="background: #f8f8f8;">
-          <line 
-            v-for="(value, index) in displayedHistogram('c')" 
+        <svg width="300" height="180" style="background: #f8f8f8;">
+          <!-- Подписи к осям -->
+          <text x="10" y="15" font-family="Arial" font-size="12" fill="black">0</text>
+          <text x="10" y="170" font-family="Arial" font-size="12" fill="black">255</text>
+          <text x="140" y="175" font-family="Arial" font-size="12" fill="black" text-anchor="middle">Интенсивность</text>
+          <text x="150" y="15" font-family="Arial" font-size="12" fill="black" text-anchor="middle">Количество пикселей</text>
+
+          <!-- Вертикальная направляющая по середине -->
+          <line x1="150" y1="0" x2="150" y2="150" stroke="black" stroke-width="1" />
+
+          <line
+            v-for="(value, index) in displayedHistogram('c')"
             :key="'c' + index"
-            :x1="300 - index" 
-            y1="150" 
-            :x2="300 - index" 
-            :y2="150 - value" 
-            stroke="cyan" 
-            :stroke-width="1" 
+            :x1="300 - index"
+            y1="150"
+            :x2="300 - index"
+            :y2="150 - value"
+            stroke="cyan"
+            :stroke-width="1"
+            stroke-opacity="0.5"
           />
-          <line 
-            v-for="(value, index) in displayedHistogram('m')" 
+          <line
+            v-for="(value, index) in displayedHistogram('m')"
             :key="'m' + index"
-            :x1="300 - index" 
-            y1="150" 
-            :x2="300 - index" 
-            :y2="150 - value" 
-            stroke="magenta" 
-            :stroke-width="1" 
+            :x1="300 - index"
+            y1="150"
+            :x2="300 - index"
+            :y2="150 - value"
+            stroke="magenta"
+            :stroke-width="1"
+            stroke-opacity="0.5"
           />
-          <line 
-            v-for="(value, index) in displayedHistogram('y')" 
+          <line
+            v-for="(value, index) in displayedHistogram('y')"
             :key="'y' + index"
-            :x1="300 - index" 
-            y1="150" 
-            :x2="300 - index" 
-            :y2="150 - value" 
-            stroke="yellow" 
-            :stroke-width="1" 
+            :x1="300 - index"
+            y1="150"
+            :x2="300 - index"
+            :y2="150 - value"
+            stroke="yellow"
+            :stroke-width="1"
+            stroke-opacity="0.5"
           />
-          <line 
-            v-for="(value, index) in displayedHistogram('k')" 
+          <line
+            v-for="(value, index) in displayedHistogram('k')"
             :key="'k' + index"
-            :x1="300 - index" 
-            y1="150" 
-            :x2="300 - index" 
-            :y2="150 - value" 
-            stroke="black" 
-            :stroke-width="1" 
+            :x1="300 - index"
+            y1="150"
+            :x2="300 - index"
+            :y2="150 - value"
+            stroke="black"
+            :stroke-width="1"
+            stroke-opacity="0.5"
           />
         </svg>
       </div>
