@@ -17,8 +17,8 @@
 
         <svg width="300" height="180" style="background: #f8f8f8;">
           <!-- Подписи к осям -->
-          <text x="10" y="15" font-family="Arial" font-size="12" fill="black">0</text>
           <text x="10" y="170" font-family="Arial" font-size="12" fill="black">255</text>
+          <text x="290" y="170" font-family="Arial" font-size="12" fill="black" text-anchor="end">0</text>
           <text x="140" y="175" font-family="Arial" font-size="12" fill="black" text-anchor="middle">Интенсивность</text>
           <text x="150" y="15" font-family="Arial" font-size="12" fill="black" text-anchor="middle">Количество пикселей</text>
 
